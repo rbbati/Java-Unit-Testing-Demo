@@ -1,6 +1,7 @@
 package ca.testing.course.converters;
 
 import ca.testing.course.dtos.StudentDto;
+import ca.testing.course.dtos.StudentSaveDto;
 import ca.testing.course.models.JavaGrade;
 import ca.testing.course.models.Student;
 import ca.testing.course.utils.DateUtils;
@@ -23,6 +24,7 @@ public class StudentConverter {
         studentDto.setId(student.getId());
         studentDto.setFirstName(student.getFirstname());
         studentDto.setLastName(student.getLastname());
+        studentDto.setBirthDate(student.getBirthDate());
         studentDto.setAge(DateUtils.calculateAge(student.getBirthDate()));
         studentDto.setJavaGradeAverage(GradeUtils.calculateAverage(getJavaGrades(student.getJavaGrades())));
 
@@ -31,5 +33,15 @@ public class StudentConverter {
 
     private List<Double> getJavaGrades(List<JavaGrade> javaGrades) {
         return javaGrades.stream().map(JavaGrade::getGrade).collect(Collectors.toList());
+    }
+
+    public Student toEntity(StudentSaveDto studentSaveDto) {
+        Student student = new Student();
+
+        student.setFirstname(studentSaveDto.getFirstName());
+        student.setLastname(studentSaveDto.getLastName());
+        student.setBirthDate(studentSaveDto.getBirthDate());
+
+        return student;
     }
 }
