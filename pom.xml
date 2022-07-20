@@ -75,6 +75,9 @@
                 <configuration>
                     <excludes>
                         <exclude>**/models/**</exclude>
+                        <exclude>**/dtos/**</exclude>
+                        <exclude>**/exceptions/**</exclude>
+                        <exclude>**/*Application*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

@@ -27,14 +27,14 @@ class ValidationServiceTest {
     @Test
     void givenNullBirthDate_WhenValidateStudent_ThenThrowException() {
         StudentSaveDto studentSavedto = buildStudentSaveDto(null);
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(StudentInvalidException.class,
                 () -> validationService.validateStudent(studentSavedto));
     }
 
     @Test
     void givenFutureBirthDate_WhenValidateStudent_ThenThrowException() {
         StudentSaveDto studentSavedto = buildStudentSaveDto(LocalDate.of(2023, 1, 1));
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(StudentInvalidException.class,
                 () -> validationService.validateStudent(studentSavedto));
     }
 
@@ -42,6 +42,7 @@ class ValidationServiceTest {
         return StudentSaveDto
                 .builder()
                 .birthDate(birthDate)
+                .email("test@exemple.ca")
                 .build();
     }
 }
